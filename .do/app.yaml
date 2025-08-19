@@ -5,10 +5,12 @@ services:
   github:
     repo: mdYoungDOer/ardent-pos
     branch: main
-  run_command: vendor/bin/heroku-php-apache2 public/
+  build_command: composer install --no-dev --optimize-autoloader
+  run_command: vendor/bin/heroku-php-apache2
   environment_slug: php
   instance_count: 1
   instance_size_slug: basic-xxs
+  http_port: 8080
   routes:
   - path: /api
   envs:

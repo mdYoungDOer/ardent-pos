@@ -23,6 +23,9 @@
     },
     "scripts": {
         "test": "phpunit",
-        "serve": "php -S localhost:8000 public/index.php"
+        "serve": "php -S localhost:8000 index.php",
+        "post-install-cmd": [
+            "php -r \"copy('.env.example', '.env');\""
+        ]
     }
 }

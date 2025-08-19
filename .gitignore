@@ -13,6 +13,10 @@ vendor/
 /frontend/build
 /frontend/dist
 
+# Allow public directory for Digital Ocean detection
+!backend/public/
+!backend/public/index.php
+
 # Logs
 *.log
 npm-debug.log*
