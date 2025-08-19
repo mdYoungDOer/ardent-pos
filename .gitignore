@@ -8,8 +8,9 @@
 # Dependencies
 node_modules/
 vendor/
-# Keep composer.lock for Digital Ocean deployment
+# Keep lock files for Digital Ocean deployment
 !backend/composer.lock
+!frontend/package-lock.json
 
 # Production builds
 /frontend/build
