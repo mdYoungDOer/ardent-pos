@@ -25,7 +25,7 @@
         "test": "phpunit",
         "serve": "php -S localhost:8000 index.php",
         "post-install-cmd": [
-            "php -r \"copy('.env.example', '.env');\""
+            "php -r \"if (!file_exists('.env') && file_exists('.env.example')) { copy('.env.example', '.env'); }\""
         ]
     }
 }
