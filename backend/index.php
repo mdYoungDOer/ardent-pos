@@ -22,8 +22,15 @@ require_once __DIR__ . '/src/Dashboard/DashboardController.php';
 use Dotenv\Dotenv;
 
 // Load environment variables
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
+// In production (Digital Ocean), use system environment variables
+// In development, try to load from .env file if it exists
+if (file_exists(__DIR__ . '/../.env')) {
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->load();
+} elseif (file_exists(__DIR__ . '/.env')) {
+    $dotenv = Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+}
 
 // CORS headers
 header('Access-Control-Allow-Origin: ' . ($_ENV['CORS_ORIGIN'] ?? 'http://localhost:3000'));
