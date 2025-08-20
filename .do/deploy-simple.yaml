@@ -1,11 +1,10 @@
-name: ardent-pos
+name: ardent-pos-simple
 services:
 - name: frontend
   source_dir: /frontend
   github:
     repo: mdYoungDOer/ardent-pos
     branch: main
-    deploy_on_push: true
   build_command: npm install && npm run build
   environment_slug: node-js
   instance_count: 1
@@ -15,17 +14,16 @@ services:
   envs:
   - key: REACT_APP_API_URL
     scope: BUILD_TIME
-    value: "${backend.PUBLIC_URL}"
+    value: "https://ardent-pos-simple-backend.ondigitalocean.app"
   - key: REACT_APP_PAYSTACK_PUBLIC_KEY
     scope: BUILD_TIME
-    type: SECRET
+    value: "pk_test_placeholder"
 
 - name: backend
   source_dir: /backend
   github:
     repo: mdYoungDOer/ardent-pos
     branch: main
-    deploy_on_push: true
   build_command: composer install --no-dev --optimize-autoloader
   run_command: vendor/bin/heroku-php-apache2
   environment_slug: php
@@ -37,44 +35,35 @@ services:
   envs:
   - key: DB_HOST
     scope: RUN_TIME
-    type: SECRET
+    value: "localhost"
   - key: DB_PORT
     scope: RUN_TIME
-    value: "25060"
+    value: "5432"
   - key: DB_NAME
     scope: RUN_TIME
-    value: "ardent-pos-db"
+    value: "ardent_pos"
   - key: DB_USER
     scope: RUN_TIME
-    type: SECRET
+    value: "postgres"
   - key: DB_PASS
     scope: RUN_TIME
-    type: SECRET
+    value: "password"
   - key: JWT_SECRET
     scope: RUN_TIME
-    type: SECRET
-  - key: APP_URL
-    scope: RUN_TIME
-    value: "${APP_URL}"
+    value: "your-jwt-secret-key-here"
   - key: CORS_ORIGIN
     scope: RUN_TIME
-    value: "${APP_URL}"
+    value: "*"
   - key: PAYSTACK_PUBLIC_KEY
     scope: RUN_TIME
-    type: SECRET
+    value: "pk_test_placeholder"
   - key: PAYSTACK_SECRET_KEY
     scope: RUN_TIME
-    type: SECRET
-  - key: SENDGRID_API_KEY
-    scope: RUN_TIME
-    type: SECRET
-  - key: SENDGRID_FROM_EMAIL
-    scope: RUN_TIME
-    type: SECRET
+    value: "sk_test_placeholder"
 
 databases:
 - engine: PG
-  name: ardent-pos-db
+  name: ardent-pos-simple-db
   num_nodes: 1
   size: db-s-1vcpu-1gb
   version: "14"

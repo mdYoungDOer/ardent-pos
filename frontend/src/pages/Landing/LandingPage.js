@@ -1,62 +1,151 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/brand.css';
 
 const LandingPage = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
+    <div className="min-h-screen">
+      {/* Navigation */}
+      <nav className="bg-white shadow-lg fixed w-full z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
+          <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <h1 className="text-2xl font-bold text-indigo-600">Ardent POS</h1>
+              <Link to="/" className="flex items-center space-x-3">
+                <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">A</span>
+                </div>
+                <span className="brand-heading text-2xl">Ardent POS</span>
+              </Link>
+            </div>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              <Link to="/features" className="brand-text hover:text-blue-600 transition-colors">Features</Link>
+              <Link to="/pricing" className="brand-text hover:text-blue-600 transition-colors">Pricing</Link>
+              <Link to="/about" className="brand-text hover:text-blue-600 transition-colors">About</Link>
+              <Link to="/contact" className="brand-text hover:text-blue-600 transition-colors">Contact</Link>
+              <Link to="/faq" className="brand-text hover:text-blue-600 transition-colors">FAQ</Link>
+              <Link to="/login" className="brand-text hover:text-blue-600 transition-colors">Sign In</Link>
+              <Link to="/demo" className="btn-primary">Try Demo</Link>
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-gray-600 hover:text-gray-900"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <div className="md:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                <Link to="/features" className="block px-3 py-2 brand-text">Features</Link>
+                <Link to="/pricing" className="block px-3 py-2 brand-text">Pricing</Link>
+                <Link to="/about" className="block px-3 py-2 brand-text">About</Link>
+                <Link to="/contact" className="block px-3 py-2 brand-text">Contact</Link>
+                <Link to="/faq" className="block px-3 py-2 brand-text">FAQ</Link>
+                <Link to="/login" className="block px-3 py-2 brand-text">Sign In</Link>
+                <Link to="/demo" className="block px-3 py-2 btn-primary text-center">Try Demo</Link>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <Link
-                to="/login"
-                className="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Sign In
+          )}
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="gradient-hero pt-32 pb-20 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center animate-fade-in-up">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              Transform Your Business with
+              <span className="block text-yellow-300"> Ardent POS</span>
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed opacity-90">
+              The most powerful, intuitive, and comprehensive point-of-sale system designed for ambitious businesses. 
+              Streamline operations, boost sales, and deliver exceptional customer experiences with cutting-edge technology.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up animate-delay-200">
+              <Link to="/demo" className="btn-secondary text-lg px-10 py-4">
+                🚀 Start Free Trial
               </Link>
-              <Link
-                to="/demo"
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium"
-              >
-                Try Demo
+              <Link to="/features" className="btn-outline text-lg px-10 py-4 text-white border-white hover:bg-white hover:text-blue-900">
+                📋 View Features
               </Link>
+            </div>
+            <div className="mt-12 animate-fade-in-up animate-delay-400">
+              <p className="text-sm opacity-75 mb-4">Trusted by 10,000+ businesses worldwide</p>
+              <div className="flex justify-center items-center space-x-8 opacity-60">
+                <div className="text-2xl font-bold">★★★★★</div>
+                <span className="text-sm">4.9/5 Rating</span>
+                <span className="text-sm">•</span>
+                <span className="text-sm">99.9% Uptime</span>
+                <span className="text-sm">•</span>
+                <span className="text-sm">24/7 Support</span>
+              </div>
             </div>
           </div>
         </div>
-      </header>
+      </section>
 
-      {/* Hero Section */}
-      <section className="pt-20 pb-32">
+      {/* Key Benefits Section */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6">
-              The Future of
-              <span className="text-indigo-600"> Point of Sale</span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Streamline your business operations with Ardent POS - the intelligent, 
-              cloud-based point of sale system designed for modern businesses. 
-              Increase sales, manage inventory, and delight customers.
+          <div className="text-center mb-16">
+            <h2 className="brand-heading text-4xl md:text-5xl mb-6">
+              Why Choose Ardent POS?
+            </h2>
+            <p className="brand-text text-xl max-w-3xl mx-auto">
+              Built by industry experts, trusted by successful businesses, and designed to scale with your growth.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/signup"
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg transform hover:scale-105 transition-all duration-200"
-              >
-                Start Free Trial
-              </Link>
-              <Link
-                to="/demo"
-                className="bg-white hover:bg-gray-50 text-indigo-600 px-8 py-4 rounded-lg text-lg font-semibold border-2 border-indigo-600 shadow-lg transform hover:scale-105 transition-all duration-200"
-              >
-                Watch Demo
-              </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="brand-card text-center animate-fade-in-up">
+              <div className="w-20 h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="brand-subheading text-2xl mb-4">Lightning Fast</h3>
+              <p className="brand-text text-lg">
+                Process transactions in under 3 seconds with our optimized checkout system. 
+                Reduce wait times and increase customer satisfaction.
+              </p>
+            </div>
+
+            <div className="brand-card text-center animate-fade-in-up animate-delay-100">
+              <div className="w-20 h-20 gradient-secondary rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="brand-subheading text-2xl mb-4">Bank-Level Security</h3>
+              <p className="brand-text text-lg">
+                Your data is protected with enterprise-grade encryption, PCI compliance, 
+                and advanced fraud detection systems.
+              </p>
+            </div>
+
+            <div className="brand-card text-center animate-fade-in-up animate-delay-200">
+              <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                </svg>
+              </div>
+              <h3 className="brand-subheading text-2xl mb-4">Smart Analytics</h3>
+              <p className="brand-text text-lg">
+                Make data-driven decisions with real-time insights, predictive analytics, 
+                and comprehensive business intelligence tools.
+              </p>
             </div>
           </div>
         </div>

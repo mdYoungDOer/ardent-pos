@@ -15,9 +15,11 @@ use App\Inventory\InventoryController;
 use App\Customers\CustomerController;
 use App\Orders\OrderController;
 use App\Payments\PaymentController;
+use App\Controllers\ContactController;
 require_once __DIR__ . '/src/Inventory/InventoryController.php';
 require_once __DIR__ . '/src/Customers/CustomerController.php';
 require_once __DIR__ . '/src/Dashboard/DashboardController.php';
+require_once __DIR__ . '/src/Controllers/ContactController.php';
 
 use Dotenv\Dotenv;
 
@@ -86,6 +88,9 @@ $router->addRoute('GET', '/api/payments/history', [OrderController::class, 'getP
 $router->addRoute('POST', '/api/payments/initialize', [PaymentController::class, 'initializePayment']);
 $router->addRoute('GET', '/api/payments/verify', [PaymentController::class, 'verifyPayment']);
 $router->addRoute('POST', '/api/payments/webhook', [PaymentController::class, 'webhook']);
+
+$router->addRoute('POST', '/api/contact', [ContactController::class, 'submit']);
+$router->addRoute('GET', '/api/contact/submissions', [ContactController::class, 'getSubmissions']);
 
 // Handle the request
 try {
