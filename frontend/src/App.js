@@ -3,12 +3,14 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Landing page
-import LandingPage from './pages/Landing/LandingPage';
+// Layouts
+import PublicLayout from './components/Layout/PublicLayout';
 
 // Public pages
+import LandingPage from './pages/Landing/LandingPage';
 import AboutPage from './pages/About/AboutPage';
 import FeaturesPage from './pages/Features/FeaturesPage';
+import PricingPage from './pages/Pricing/PricingPage';
 import FAQPage from './pages/FAQ/FAQPage';
 import ContactPage from './pages/Contact/ContactPage';
 
@@ -33,15 +35,20 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        {/* Public routes */}
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/features" element={<FeaturesPage />} />
-        <Route path="/faq" element={<FAQPage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        {/* Public routes with shared layout */}
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/features" element={<FeaturesPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Route>
+
+        {/* Auth routes without shared layout */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
+
         {/* Protected app routes */}
         <Route path="/app" element={<ProtectedRoute><Navigate to="/app/dashboard" replace /></ProtectedRoute>} />
         <Route path="/app/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
