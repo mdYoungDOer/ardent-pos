@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -32,44 +31,40 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <div className="App">
-          <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/features" element={<FeaturesPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            
-            {/* Protected app routes */}
-            <Route path="/app" element={<ProtectedRoute><Navigate to="/app/dashboard" replace /></ProtectedRoute>} />
-            <Route path="/app/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/app/products" element={<ProtectedRoute><Products /></ProtectedRoute>} />
-            <Route path="/app/sales" element={<ProtectedRoute><Sales /></ProtectedRoute>} />
-            <Route path="/app/inventory" element={<ProtectedRoute><Inventory /></ProtectedRoute>} />
-            <Route path="/app/customers" element={<ProtectedRoute><Customers /></ProtectedRoute>} />
-            <Route path="/app/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
-            <Route path="/app/payments" element={<ProtectedRoute><Payments /></ProtectedRoute>} />
-            <Route path="/app/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-          </Routes>
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-        </div>
-      </Router>
-    </AuthProvider>
+    <div className="App">
+      <Routes>
+        {/* Public routes */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/features" element={<FeaturesPage />} />
+        <Route path="/faq" element={<FAQPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        
+        {/* Protected app routes */}
+        <Route path="/app" element={<ProtectedRoute><Navigate to="/app/dashboard" replace /></ProtectedRoute>} />
+        <Route path="/app/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/app/products" element={<ProtectedRoute><Products /></ProtectedRoute>} />
+        <Route path="/app/sales" element={<ProtectedRoute><Sales /></ProtectedRoute>} />
+        <Route path="/app/inventory" element={<ProtectedRoute><Inventory /></ProtectedRoute>} />
+        <Route path="/app/customers" element={<ProtectedRoute><Customers /></ProtectedRoute>} />
+        <Route path="/app/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+        <Route path="/app/payments" element={<ProtectedRoute><Payments /></ProtectedRoute>} />
+        <Route path="/app/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+      </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </div>
   );
 }
 
