@@ -22,7 +22,7 @@ class Router {
         $this->addRoute('DELETE', $path, $handler);
     }
     
-    private function addRoute($method, $path, $handler) {
+    public function addRoute($method, $path, $handler) {
         $this->routes[] = [
             'method' => $method,
             'path' => $path,
