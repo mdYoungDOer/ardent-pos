@@ -1,4 +1,4 @@
-# Ardent POS
+# Ardent POS - Professional Point of Sale System
 
 A comprehensive, mobile-first Point of Sale (POS) web application for small to medium businesses.
 
