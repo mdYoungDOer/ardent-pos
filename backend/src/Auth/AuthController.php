@@ -3,8 +3,11 @@
  * Authentication Controller for Ardent POS
  */
 
-require_once __DIR__ . '/../BaseController.php';
-require_once __DIR__ . '/JWTHelper.php';
+namespace App\Auth;
+
+use App\Core\BaseController;
+use App\Core\Database;
+use App\Core\JWTHelper;
 
 class AuthController extends BaseController {
     

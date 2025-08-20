@@ -3,8 +3,11 @@
  * JWT Helper for Ardent POS
  */
 
+namespace App\Auth;
+
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Exception;
 
 class JWTHelper {
     private static function getSecretKey() {

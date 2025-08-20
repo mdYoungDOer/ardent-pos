@@ -6,20 +6,17 @@
 // Load environment variables
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/config/database.php';
-require_once __DIR__ . '/src/Router.php';
+
 use App\Auth\AuthController;
-use App\Dashboard\DashboardController;
-use App\Products\ProductController;
-use App\Sales\SalesController;
-use App\Inventory\InventoryController;
+use App\Controllers\ContactController;
+use App\Core\Router;
 use App\Customers\CustomerController;
+use App\Dashboard\DashboardController;
+use App\Inventory\InventoryController;
 use App\Orders\OrderController;
 use App\Payments\PaymentController;
-use App\Controllers\ContactController;
-require_once __DIR__ . '/src/Inventory/InventoryController.php';
-require_once __DIR__ . '/src/Customers/CustomerController.php';
-require_once __DIR__ . '/src/Dashboard/DashboardController.php';
-require_once __DIR__ . '/src/Controllers/ContactController.php';
+use App\Products\ProductController;
+use App\Sales\SalesController;
 
 use Dotenv\Dotenv;
 
@@ -47,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Initialize router
-$router = new Router();
+$router = new App\Core\Router();
 
 // Route definitions
 $router->addRoute('POST', '/api/auth/register', [AuthController::class, 'register']);

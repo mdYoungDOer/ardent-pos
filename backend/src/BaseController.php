@@ -3,7 +3,10 @@
  * Base Controller for Ardent POS API
  */
 
-require_once __DIR__ . '/Auth/JWTHelper.php';
+namespace App\Core;
+
+use App\Auth\JWTHelper;
+use Exception;
 
 abstract class BaseController {
     
@@ -56,7 +59,7 @@ abstract class BaseController {
         $token = substr($authHeader, 7);
         
         try {
-            $payload = JWTHelper::decode($token);
+                        $payload = (array) JWTHelper::decode($token);
             
             // Get fresh user data from database
             $pdo = Database::getConnection();

@@ -3,6 +3,10 @@
  * Simple Router for Ardent POS API
  */
 
+namespace App\Core;
+
+use Exception;
+
 class Router {
     private $routes = [];
     
