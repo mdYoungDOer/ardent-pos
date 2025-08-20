@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/brand.css';
+import '../../styles/brand.css';
 
 const FAQPage = () => {
   const [openFAQ, setOpenFAQ] = useState(null);

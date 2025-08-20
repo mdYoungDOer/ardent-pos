@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import '../styles/brand.css';
+import '../../styles/brand.css';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
