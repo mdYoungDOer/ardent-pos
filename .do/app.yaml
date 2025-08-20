@@ -22,7 +22,7 @@ services:
     value: "25060"
   - key: DB_NAME
     scope: RUN_TIME
-    value: "ardent_pos"
+    value: "ardent-pos-db"
   - key: DB_USER
     scope: RUN_TIME
     type: SECRET
