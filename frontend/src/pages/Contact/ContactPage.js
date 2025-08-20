@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { BuildingOffice2Icon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
-import PublicLayout from '../../components/Layout/PublicLayout';
 
 const ContactPage = () => {
     const [formData, setFormData] = useState({
@@ -36,7 +35,7 @@ const ContactPage = () => {
     };
 
     return (
-        <PublicLayout>
+        <>
             <div className="relative isolate bg-slate-900">
                 <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
                     <div className="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">
@@ -188,7 +187,7 @@ const ContactPage = () => {
                     </form>
                 </div>
             </div>
-        </PublicLayout>
+        </>
     );
 };
 

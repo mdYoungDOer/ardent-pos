@@ -1,5 +1,4 @@
 import React from 'react';
-import PublicLayout from '../../components/Layout/PublicLayout';
 import { BuildingOffice2Icon, RocketLaunchIcon, EyeIcon } from '@heroicons/react/24/outline';
 
 const AboutPage = () => {
@@ -40,7 +39,7 @@ const AboutPage = () => {
   ];
 
   return (
-    <PublicLayout>
+    <>
       {/* Hero Section */}
       <section className="bg-slate-50">
         <div className="container mx-auto px-4 py-20 text-center">
@@ -148,8 +147,7 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-
-    </PublicLayout>
+    </>
   );
 };
 

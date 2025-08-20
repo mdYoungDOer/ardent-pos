@@ -1,6 +1,5 @@
 import React from 'react';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
-import PublicLayout from '../../components/Layout/PublicLayout';
 
 const PricingPage = () => {
 
@@ -49,8 +48,7 @@ const PricingPage = () => {
   ];
 
   return (
-    <PublicLayout>
-      <div className="py-12 bg-white">
+          <div className="py-12 bg-white">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold brand-text-gradient mb-4">Find the Perfect Plan</h1>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">Simple, transparent pricing that scales with your business. No hidden fees, ever.</p>
@@ -81,8 +79,7 @@ const PricingPage = () => {
           </div>
         </div>
       </div>
-    </PublicLayout>
-  );
+      );
 };
 
 export default PricingPage;

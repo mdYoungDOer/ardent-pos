@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PublicLayout from '../../components/Layout/PublicLayout';
 import { ArrowRightIcon, CurrencyDollarIcon, CubeIcon, UsersIcon } from '@heroicons/react/24/outline';
 
 const LandingPage = () => {
@@ -37,7 +36,7 @@ const LandingPage = () => {
   ];
 
   return (
-    <PublicLayout>
+    <>
       {/* Hero Section */}
       <section className="bg-slate-50">
         <div className="container mx-auto px-4 py-20 text-center">
@@ -103,7 +102,7 @@ const LandingPage = () => {
           <Link to="/register" className="cta-btn text-xl px-10 py-4">Start Selling Smarter</Link>
         </div>
       </section>
-    </PublicLayout>
+    </>
   );
 };
 

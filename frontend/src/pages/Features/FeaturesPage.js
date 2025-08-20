@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PublicLayout from '../../components/Layout/PublicLayout';
 import {
   ShoppingCartIcon,
   ArchiveBoxIcon,
@@ -103,7 +102,7 @@ const differentiators = [
 
 const FeaturesPage = () => {
   return (
-    <PublicLayout>
+    <>
       <div className="bg-slate-900">
         {/* Hero Section */}
         <div className="relative isolate overflow-hidden pt-14">
@@ -206,7 +205,7 @@ const FeaturesPage = () => {
         </div>
 
       </div>
-    </PublicLayout>
+    </>
   );
 };
 
