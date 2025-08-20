@@ -1,5 +1,24 @@
 name: ardent-pos
 services:
+- name: frontend
+  source_dir: /frontend
+  github:
+    repo: mdYoungDOer/ardent-pos
+    branch: main
+  build_command: npm install && npm run build
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  routes:
+  - path: /
+  envs:
+  - key: REACT_APP_API_URL
+    scope: BUILD_TIME
+    value: "${backend.PUBLIC_URL}"
+  - key: REACT_APP_PAYSTACK_PUBLIC_KEY
+    scope: BUILD_TIME
+    type: SECRET
+
 - name: backend
   source_dir: /backend
   github:
@@ -49,25 +68,6 @@ services:
     type: SECRET
   - key: SENDGRID_FROM_EMAIL
     scope: RUN_TIME
-    type: SECRET
-
-- name: frontend
-  source_dir: /frontend
-  github:
-    repo: mdYoungDOer/ardent-pos
-    branch: main
-  build_command: npm install && npm run build
-  environment_slug: node-js
-  instance_count: 1
-  instance_size_slug: basic-xxs
-  routes:
-  - path: /
-  envs:
-  - key: REACT_APP_API_URL
-    scope: BUILD_TIME
-    value: "${backend.PUBLIC_URL}"
-  - key: REACT_APP_PAYSTACK_PUBLIC_KEY
-    scope: BUILD_TIME
     type: SECRET
 
 databases:
