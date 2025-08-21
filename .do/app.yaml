@@ -24,8 +24,8 @@ services:
     repo: mdYoungDOer/ardent-pos
     branch: main
     deploy_on_push: true
-  build_command: composer install --no-dev --optimize-autoloader
-  run_command: vendor/bin/heroku-php-apache2
+  build_command: echo "No build needed"
+  run_command: php -S 0.0.0.0:8080 -t backend simple-index.php
   environment_slug: php
   instance_count: 1
   instance_size_slug: basic-xxs

@@ -15,6 +15,7 @@ import FAQPage from './pages/FAQ/FAQPage';
 import ContactPage from './pages/Contact/ContactPage';
 
 // Authentication pages
+import { AuthProvider } from './contexts/SimpleAuthContext';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 
