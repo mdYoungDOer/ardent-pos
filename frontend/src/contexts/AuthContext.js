@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // Configure axios defaults
-  const API_URL = process.env.REACT_APP_API_URL || 'https://ardent-pos-e7qdc.ondigitalocean.app/api';
+  const API_URL = process.env.REACT_APP_API_URL || 'https://ardent-pos-e7qdc.ondigitalocean.app';
   axios.defaults.baseURL = API_URL;
 
   // Set auth token in axios headers
