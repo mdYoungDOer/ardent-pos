@@ -7,7 +7,8 @@ namespace App\Auth;
 
 use App\Core\BaseController;
 use App\Core\Database;
-use App\Core\JWTHelper;
+use App\Auth\JWTHelper;
+use PDOException;
 
 class AuthController extends BaseController {
     
