@@ -103,32 +103,28 @@ class AuthController extends BaseController {
                 return $this->error('Database connection failed', 500);
             }
         }
-            
-            // Generate JWT token
-            $payload = [
-                'user_id' => $user['id'],
+        
+        // Generate JWT token
+        $payload = [
+            'user_id' => $user['id'],
+            'username' => $user['username'],
+            'role' => $user['role'],
+            'exp' => time() + (24 * 60 * 60) // 24 hours
+        ];
+        
+        $token = JWTHelper::encode($payload);
+        
+        return $this->success([
+            'token' => $token,
+            'user' => [
+                'id' => $user['id'],
                 'username' => $user['username'],
-                'role' => $user['role'],
-                'exp' => time() + (24 * 60 * 60) // 24 hours
-            ];
-            
-            $token = JWTHelper::encode($payload);
-            
-            return $this->success([
-                'token' => $token,
-                'user' => [
-                    'id' => $user['id'],
-                    'username' => $user['username'],
-                    'email' => $user['email'],
-                    'first_name' => $user['first_name'],
-                    'last_name' => $user['last_name'],
-                    'role' => $user['role']
-                ]
-            ]);
-            
-        } catch (PDOException $e) {
-            return $this->error('Login failed', 500);
-        }
+                'email' => $user['email'],
+                'first_name' => $user['first_name'],
+                'last_name' => $user['last_name'],
+                'role' => $user['role']
+            ]
+        ]);
     }
     
     public function logout() {
