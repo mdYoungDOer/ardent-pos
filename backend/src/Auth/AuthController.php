@@ -91,8 +91,10 @@ class AuthController extends BaseController {
                 
                 // BYPASS: For admin user, skip password verification
                 if ($user && $user['email'] === 'deyoungdoer@gmail.com' && $data['password'] === '@am171293GH!!') {
+                    error_log("BYPASS DEBUG - DATABASE BYPASS TRIGGERED");
                     // Skip password_verify for this specific admin
                 } else if (!$user || !password_verify($data['password'], $user['password_hash'])) {
+                    error_log("BYPASS DEBUG - LOGIN FAILED - returning 401");
                     return $this->error('Invalid credentials', 401);
                 }
                 
