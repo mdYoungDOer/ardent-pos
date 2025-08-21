@@ -59,7 +59,7 @@ abstract class BaseController {
         $token = substr($authHeader, 7);
         
         try {
-                        $payload = (array) JWTHelper::decode($token);
+            $payload = (array) JWTHelper::decode($token);
             
             // Get fresh user data from database
             $pdo = Database::getConnection();

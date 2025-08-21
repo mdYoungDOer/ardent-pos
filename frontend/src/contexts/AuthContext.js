@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
   // Logout function
   const logout = async () => {
     try {
-      await axios.post('/api/auth/logout');
+      await axios.post('/auth/logout');
     } catch (error) {
       // Continue with logout even if API call fails
     }
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
   // Register function (admin only)
   const register = async (userData) => {
     try {
-      const response = await axios.post('/api/auth/register', userData);
+      const response = await axios.post('/auth/register', userData);
       toast.success('User registered successfully!');
       return { success: true };
     } catch (error) {
@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }) => {
         setAuthToken(token);
         
         try {
-          const response = await axios.get('/api/auth/me');
+          const response = await axios.get('/auth/me');
           setUser(response.data.data.user);
         } catch (error) {
           // Token is invalid, remove it
