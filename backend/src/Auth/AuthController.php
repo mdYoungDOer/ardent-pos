@@ -121,7 +121,12 @@ class AuthController extends BaseController {
             'exp' => time() + (24 * 60 * 60) // 24 hours
         ];
         
-        $token = JWTHelper::encode($payload);
+        try {
+            $token = JWTHelper::encode($payload);
+        } catch (Exception $e) {
+            error_log("JWT Error: " . $e->getMessage());
+            return $this->error('Token generation failed', 500);
+        }
         
         return $this->success([
             'token' => $token,
