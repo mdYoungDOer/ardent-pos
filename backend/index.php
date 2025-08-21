@@ -47,47 +47,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $router = new Router();
 
 // Route definitions
-$router->addRoute('POST', '/api/auth/register', [AuthController::class, 'register']);
-$router->addRoute('POST', '/api/auth/login', [AuthController::class, 'login']);
-$router->addRoute('POST', '/api/auth/logout', [AuthController::class, 'logout']);
-$router->addRoute('GET', '/api/auth/me', [AuthController::class, 'me']);
-$router->addRoute('POST', '/api/auth/forgot-password', [AuthController::class, 'forgotPassword']);
-$router->addRoute('POST', '/api/auth/reset-password', [AuthController::class, 'resetPassword']);
+$router->addRoute('POST', '/auth/register', [AuthController::class, 'register']);
+$router->addRoute('POST', '/auth/login', [AuthController::class, 'login']);
+$router->addRoute('POST', '/auth/logout', [AuthController::class, 'logout']);
+$router->addRoute('GET', '/auth/me', [AuthController::class, 'me']);
+$router->addRoute('POST', '/auth/forgot-password', [AuthController::class, 'forgotPassword']);
+$router->addRoute('POST', '/auth/reset-password', [AuthController::class, 'resetPassword']);
 
-$router->addRoute('GET', '/api/dashboard', [DashboardController::class, 'getDashboard']);
+$router->addRoute('GET', '/dashboard', [DashboardController::class, 'getDashboard']);
 
-$router->addRoute('GET', '/api/products', [ProductController::class, 'getProducts']);
-$router->addRoute('POST', '/api/products', [ProductController::class, 'createProduct']);
-$router->addRoute('GET', '/api/products/(\d+)', [ProductController::class, 'getProduct']);
-$router->addRoute('PUT', '/api/products/(\d+)', [ProductController::class, 'updateProduct']);
-$router->addRoute('DELETE', '/api/products/(\d+)', [ProductController::class, 'deleteProduct']);
+$router->addRoute('GET', '/products', [ProductController::class, 'getProducts']);
+$router->addRoute('POST', '/products', [ProductController::class, 'createProduct']);
+$router->addRoute('GET', '/products/(\d+)', [ProductController::class, 'getProduct']);
+$router->addRoute('PUT', '/products/(\d+)', [ProductController::class, 'updateProduct']);
+$router->addRoute('DELETE', '/products/(\d+)', [ProductController::class, 'deleteProduct']);
 
-$router->addRoute('GET', '/api/sales', [SalesController::class, 'getSales']);
-$router->addRoute('POST', '/api/sales', [SalesController::class, 'createSale']);
-$router->addRoute('GET', '/api/sales/(\d+)', [SalesController::class, 'getSale']);
+$router->addRoute('GET', '/sales', [SalesController::class, 'getSales']);
+$router->addRoute('POST', '/sales', [SalesController::class, 'createSale']);
+$router->addRoute('GET', '/sales/(\d+)', [SalesController::class, 'getSale']);
 
-$router->addRoute('GET', '/api/inventory', [InventoryController::class, 'getInventory']);
-$router->addRoute('PUT', '/api/inventory/(\d+)', [InventoryController::class, 'updateStock']);
-$router->addRoute('GET', '/api/inventory/low-stock', [InventoryController::class, 'getLowStock']);
+$router->addRoute('GET', '/inventory', [InventoryController::class, 'getInventory']);
+$router->addRoute('PUT', '/inventory/(\d+)', [InventoryController::class, 'updateStock']);
+$router->addRoute('GET', '/inventory/low-stock', [InventoryController::class, 'getLowStock']);
 
-$router->addRoute('GET', '/api/customers', [CustomerController::class, 'getCustomers']);
-$router->addRoute('POST', '/api/customers', [CustomerController::class, 'createCustomer']);
-$router->addRoute('GET', '/api/customers/(\d+)', [CustomerController::class, 'getCustomer']);
-$router->addRoute('PUT', '/api/customers/(\d+)', [CustomerController::class, 'updateCustomer']);
-$router->addRoute('DELETE', '/api/customers/(\d+)', [CustomerController::class, 'deleteCustomer']);
+$router->addRoute('GET', '/customers', [CustomerController::class, 'getCustomers']);
+$router->addRoute('POST', '/customers', [CustomerController::class, 'createCustomer']);
+$router->addRoute('GET', '/customers/(\d+)', [CustomerController::class, 'getCustomer']);
+$router->addRoute('PUT', '/customers/(\d+)', [CustomerController::class, 'updateCustomer']);
+$router->addRoute('DELETE', '/customers/(\d+)', [CustomerController::class, 'deleteCustomer']);
 
-$router->addRoute('GET', '/api/orders', [OrderController::class, 'getOrders']);
-$router->addRoute('POST', '/api/orders', [OrderController::class, 'createOrder']);
-$router->addRoute('GET', '/api/orders/(\d+)', [OrderController::class, 'getOrder']);
-$router->addRoute('PUT', '/api/orders/(\d+)/status', [OrderController::class, 'updateOrderStatus']);
-$router->addRoute('GET', '/api/payments/history', [OrderController::class, 'getPaymentHistory']);
+$router->addRoute('GET', '/orders', [OrderController::class, 'getOrders']);
+$router->addRoute('POST', '/orders', [OrderController::class, 'createOrder']);
+$router->addRoute('GET', '/orders/(\d+)', [OrderController::class, 'getOrder']);
+$router->addRoute('PUT', '/orders/(\d+)/status', [OrderController::class, 'updateOrderStatus']);
+$router->addRoute('GET', '/payments/history', [OrderController::class, 'getPaymentHistory']);
 
-$router->addRoute('POST', '/api/payments/initialize', [PaymentController::class, 'initializePayment']);
-$router->addRoute('GET', '/api/payments/verify', [PaymentController::class, 'verifyPayment']);
-$router->addRoute('POST', '/api/payments/webhook', [PaymentController::class, 'webhook']);
+$router->addRoute('POST', '/payments/initialize', [PaymentController::class, 'initializePayment']);
+$router->addRoute('GET', '/payments/verify', [PaymentController::class, 'verifyPayment']);
+$router->addRoute('POST', '/payments/webhook', [PaymentController::class, 'webhook']);
 
-$router->addRoute('POST', '/api/contact', [ContactController::class, 'submit']);
-$router->addRoute('GET', '/api/contact/submissions', [ContactController::class, 'getSubmissions']);
+$router->addRoute('POST', '/contact', [ContactController::class, 'submit']);
+$router->addRoute('GET', '/contact/submissions', [ContactController::class, 'getSubmissions']);
 
 // Handle the request
 try {

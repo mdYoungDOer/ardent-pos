@@ -38,14 +38,9 @@ class Router {
         $method = $_SERVER['REQUEST_METHOD'];
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         
-        // Debug logging
-        error_log("Router Debug - Method: $method, Path: $path");
-        error_log("Router Debug - Available routes: " . json_encode(array_map(function($r) { return $r['method'] . ' ' . $r['path']; }, $this->routes)));
-        
         foreach ($this->routes as $route) {
             if ($route['method'] === $method) {
                 $pattern = $this->pathToRegex($route['path']);
-                error_log("Router Debug - Checking pattern: $pattern against path: $path");
                 if (preg_match($pattern, $path, $matches)) {
                     array_shift($matches); // Remove full match
                     return $this->callHandler($route['handler'], $matches);
@@ -55,7 +50,7 @@ class Router {
         
         // Route not found
         http_response_code(404);
-        echo json_encode(['error' => 'Route not found', 'debug' => ['method' => $method, 'path' => $path]]);
+        echo json_encode(['error' => 'Route not found']);
     }
     
     private function pathToRegex($path) {
