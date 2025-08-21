@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Initialize router
-$router = new App\Core\Router();
+$router = new Router();
 
 // Route definitions
 $router->addRoute('POST', '/api/auth/register', [AuthController::class, 'register']);
