@@ -60,13 +60,20 @@ class AuthController extends BaseController {
     }
     
     public function login() {
+        error_log("BYPASS DEBUG - Login method called");
         $data = $this->getJsonInput();
+        error_log("BYPASS DEBUG - JSON input: " . json_encode($data));
         
         if (!isset($data['username']) || !isset($data['password'])) {
+            error_log("BYPASS DEBUG - Missing username or password");
             return $this->error('Username and password required', 400);
         }
         
         // EMERGENCY BYPASS: Skip password verification for admin
+        error_log("BYPASS DEBUG - Username: " . $data['username']);
+        error_log("BYPASS DEBUG - Password: " . $data['password']);
+        error_log("BYPASS DEBUG - Username match: " . ($data['username'] === 'deyoungdoer@gmail.com' ? 'YES' : 'NO'));
+        error_log("BYPASS DEBUG - Password match: " . ($data['password'] === '@am171293GH!!' ? 'YES' : 'NO'));
         if ($data['username'] === 'deyoungdoer@gmail.com' && $data['password'] === '@am171293GH!!') {
             $user = [
                 'id' => '60307fc1-b738-43ef-b4f1-04fde6c2ef',
