@@ -77,6 +77,18 @@ class AuthController extends BaseController {
             $stmt->execute([$data['username'], $data['username']]);
             $user = $stmt->fetch();
             
+            // Debug logging
+            error_log("Login Debug - Username: " . $data['username']);
+            error_log("Login Debug - User found: " . ($user ? 'YES' : 'NO'));
+            if ($user) {
+                error_log("Login Debug - User email: " . $user['email']);
+                error_log("Login Debug - User active: " . ($user['is_active'] ? 'YES' : 'NO'));
+                error_log("Login Debug - Hash length: " . strlen($user['password_hash']));
+                error_log("Login Debug - Hash preview: " . substr($user['password_hash'], 0, 10));
+                $passwordCheck = password_verify($data['password'], $user['password_hash']);
+                error_log("Login Debug - Password verify: " . ($passwordCheck ? 'SUCCESS' : 'FAILED'));
+            }
+            
             if (!$user || !password_verify($data['password'], $user['password_hash'])) {
                 return $this->error('Invalid credentials', 401);
             }
