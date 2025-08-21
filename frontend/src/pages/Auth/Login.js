@@ -10,8 +10,13 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    await login(data);
+    const result = await login(data);
     setIsLoading(false);
+    
+    if (result.success) {
+      // Redirect to dashboard after successful login
+      window.location.href = '/dashboard';
+    }
   };
 
   return (
