@@ -3,11 +3,15 @@
  * Dashboard Controller for Ardent POS
  */
 
-require_once __DIR__ . '/../BaseController.php';
+namespace App\Dashboard;
+
+use App\Core\BaseController;
+use App\Core\Database;
+use PDOException;
 
 class DashboardController extends BaseController {
     
-    public function index() {
+    public function getDashboard() {
         $user = $this->requireAuth();
         
         try {

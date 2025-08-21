@@ -3,7 +3,12 @@
  * Sales Controller for Ardent POS
  */
 
-require_once __DIR__ . '/../BaseController.php';
+namespace App\Sales;
+
+use App\Core\BaseController;
+use App\Core\Database;
+use PDOException;
+use Exception;
 
 class SalesController extends BaseController {
     
@@ -209,7 +214,7 @@ class SalesController extends BaseController {
         }
     }
     
-    public function show($id) {
+    public function getSale($id) {
         $this->requireAuth(['admin', 'manager', 'cashier']);
         
         try {

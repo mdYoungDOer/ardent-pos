@@ -30,6 +30,7 @@ class Router {
         $this->routes[] = [
             'method' => $method,
             'path' => $path,
+            'pattern' => $this->pathToRegex($path),
             'handler' => $handler
         ];
     }

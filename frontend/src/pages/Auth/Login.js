@@ -7,6 +7,7 @@ const Login = () => {
   const { login } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     setIsLoading(true);
@@ -14,8 +15,7 @@ const Login = () => {
     setIsLoading(false);
     
     if (result.success) {
-      // Redirect to dashboard after successful login
-      window.location.href = '/dashboard';
+      navigate('/app/dashboard');
     }
   };
 

@@ -61,57 +61,34 @@ class AuthController extends BaseController {
     }
     
     public function login() {
-        error_log("BYPASS DEBUG - Login method called");
         $data = $this->getJsonInput();
-        error_log("BYPASS DEBUG - JSON input: " . json_encode($data));
         
         if (!isset($data['username']) || !isset($data['password'])) {
-            error_log("BYPASS DEBUG - Missing username or password");
             return $this->error('Username and password required', 400);
         }
         
-        // EMERGENCY BYPASS: Skip password verification for admin
-        error_log("BYPASS DEBUG - Username: " . $data['username']);
-        error_log("BYPASS DEBUG - Password: " . $data['password']);
-        error_log("BYPASS DEBUG - Username match: " . ($data['username'] === 'deyoungdoer@gmail.com' ? 'YES' : 'NO'));
-        error_log("BYPASS DEBUG - Password match: " . ($data['password'] === '@am171293GH!!' ? 'YES' : 'NO'));
-        if ($data['username'] === 'deyoungdoer@gmail.com' && $data['password'] === '@am171293GH!!') {
-            $user = [
-                'id' => '60307fc1-b738-43ef-b4f1-04fde6c2ef',
-                'username' => 'deyoungdoer',
-                'email' => 'deyoungdoer@gmail.com',
-                'first_name' => 'DeYoung',
-                'last_name' => 'Doer',
-                'role' => 'admin',
-                'is_active' => true
-            ];
-        } else {
-            try {
-                $pdo = Database::getConnection();
-                
-                $stmt = $pdo->prepare("
-                    SELECT id, username, email, password_hash, first_name, last_name, role, is_active
-                    FROM users 
-                    WHERE username = ? OR email = ?
-                ");
-                $stmt->execute([$data['username'], $data['username']]);
-                $user = $stmt->fetch();
-                
-                // BYPASS: For admin user, skip password verification
-                if ($user && $user['email'] === 'deyoungdoer@gmail.com' && $data['password'] === '@am171293GH!!') {
-                    error_log("BYPASS DEBUG - DATABASE BYPASS TRIGGERED");
-                    // Skip password_verify for this specific admin
-                } else if (!$user || !password_verify($data['password'], $user['password_hash'])) {
-                    error_log("BYPASS DEBUG - LOGIN FAILED - returning 401");
-                    return $this->error('Invalid credentials', 401);
-                }
-                
-                if (!$user['is_active']) {
-                    return $this->error('Account is inactive', 403);
-                }
-            } catch (Exception $e) {
-                return $this->error('Database connection failed', 500);
+        try {
+            $pdo = Database::getConnection();
+            
+            $stmt = $pdo->prepare("
+                SELECT id, username, email, password_hash, first_name, last_name, role, is_active
+                FROM users 
+                WHERE username = ? OR email = ?
+            ");
+            $stmt->execute([$data['username'], $data['username']]);
+            $user = $stmt->fetch();
+            
+            if (!$user || !password_verify($data['password'], $user['password_hash'])) {
+                return $this->error('Invalid credentials', 401);
             }
+            
+            if (!$user['is_active']) {
+                return $this->error('Account is inactive', 403);
+            }
+            
+        } catch (PDOException $e) {
+            error_log("Database error in login: " . $e->getMessage());
+            return $this->error('Login failed', 500);
         }
         
         // Generate JWT token

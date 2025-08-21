@@ -3,7 +3,12 @@
  * Product Controller for Ardent POS
  */
 
-require_once __DIR__ . '/../BaseController.php';
+namespace App\Products;
+
+use App\Core\BaseController;
+use App\Core\Database;
+use PDOException;
+use Exception;
 
 class ProductController extends BaseController {
     
@@ -228,7 +233,7 @@ class ProductController extends BaseController {
         }
     }
     
-    public function destroy($id) {
+    public function deleteProduct($id) {
         $this->requireAuth(['admin', 'manager']);
         
         try {
