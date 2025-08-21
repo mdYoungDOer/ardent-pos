@@ -31,7 +31,15 @@ services:
   instance_size_slug: basic-xxs
   http_port: 8080
   routes:
-  - path: /api
+  - path: /auth
+  - path: /dashboard
+  - path: /products
+  - path: /sales
+  - path: /inventory
+  - path: /customers
+  - path: /orders
+  - path: /payments
+  - path: /contact
   envs:
   - key: DB_HOST
     scope: RUN_TIME
