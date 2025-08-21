@@ -31,24 +31,7 @@ services:
   instance_size_slug: basic-xxs
   http_port: 8080
   routes:
-  - path: /auth
-    prefix_rewrite: /
-  - path: /dashboard
-    prefix_rewrite: /
-  - path: /products
-    prefix_rewrite: /
-  - path: /sales
-    prefix_rewrite: /
-  - path: /inventory
-    prefix_rewrite: /
-  - path: /customers
-    prefix_rewrite: /
-  - path: /orders
-    prefix_rewrite: /
-  - path: /payments
-    prefix_rewrite: /
-  - path: /contact
-    prefix_rewrite: /
+  - path: /
   envs:
   - key: DB_HOST
     scope: RUN_TIME
